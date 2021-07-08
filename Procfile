@@ -1,0 +1,1 @@
+web: gunicorn PROJECTCLASE12.wsgi --log-file -

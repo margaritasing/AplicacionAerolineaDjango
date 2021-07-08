@@ -1,0 +1,23 @@
+{% extends "vuelos/layout.html" %}
+{% block body %}
+    <h1>Vuelos</h1>
+    <ul>
+        {% for un_vuelo in lista_vuelos %}
+            <li>
+               
+                <a href="{% url 'AEROLINEA:vuelo' un_vuelo.id %}">Ver Vuelo #{{un_vuelo.id}}</a> / 
+                
+                {% if perms.AEROLINEA.change_vuelo %}
+                <a href="{% url 'AEROLINEA:vuelo_modificar' un_vuelo.id %}">Editar</a> / 
+                {% endif %}
+                {% if perms.AEROLINEA.delete_vuelo %} 
+                <a href="{% url 'AEROLINEA:vuelo_eliminar' un_vuelo.id %}">Eliminar</a>  
+                {% endif %}
+                ---
+                {{un_vuelo.origen}} hacia {{un_vuelo.destino}}</li>
+        {% endfor %}
+    </ul>
+    {% if perms.AEROLINEA.add_vuelo %}
+    <a href="{% url 'AEROLINEA:vuelo_alta'%}">Alta de Vuelo</a>
+    {% endif %}
+{% endblock %}
